@@ -1,0 +1,14 @@
+.shop-cart-wrapper {
+  list-style: none;
+  margin-bottom: 150px;
+  min-height: 100%;
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  li:not(:last-child) {
+    border-bottom: 1px solid #cecbcb;
+    padding-bottom: 30px;
+  }
+}

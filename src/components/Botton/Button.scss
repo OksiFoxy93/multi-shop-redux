@@ -1,0 +1,38 @@
+$dark-gray: #414040;
+$light-gray: #f0f0f0;
+$orange: #ffd333;
+
+.button {
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $orange;
+  background-color: #414040;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  line-height: normal;
+  outline: none;
+  padding: 8px 16px;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.button.disabled{
+  background-color: $orange;
+  color: $dark-gray;
+}
+
+.button.disabled:hover {
+  box-shadow: none;
+  transform: none;
+}

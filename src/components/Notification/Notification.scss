@@ -1,0 +1,15 @@
+.notification-wrapper {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 350px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fdebb4;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.40) 0 4px 4px;
+}
