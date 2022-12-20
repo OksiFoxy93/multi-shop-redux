@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux";
+
 import { BackButton } from "../../components/BackButton";
 import { ShoppingProduct } from "../../components/ShoppingProduct";
-
 import "./ShoppingCart.scss"
-import PropTypes from "prop-types";
 
-const ShoppingCart = ({ productsInCart, clickRemoveIcon }) => {
+import { productsInCartSelector } from "../../selectors";
+
+const ShoppingCart = () => {
+    const productsInCart = useSelector(productsInCartSelector);
 
     return (
         <div className="wrapper">
@@ -19,7 +22,6 @@ const ShoppingCart = ({ productsInCart, clickRemoveIcon }) => {
                                         <ShoppingProduct
                                             { ...product }
                                             listNumber={ index + 1 }
-                                            clickRemoveIcon={ clickRemoveIcon }
                                         />
                                     </li>
                                 ))
@@ -35,11 +37,6 @@ const ShoppingCart = ({ productsInCart, clickRemoveIcon }) => {
             }
         </div>
     );
-};
-
-ShoppingCart.propTypes = {
-    clickRemoveIcon: PropTypes.func,
-    productsInCart: PropTypes.array,
 };
 
 export default ShoppingCart;

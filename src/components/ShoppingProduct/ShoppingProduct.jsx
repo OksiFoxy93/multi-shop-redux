@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import { ReactComponent as RemoveIcon } from "../../icons/remove.svg";
-
 import "./ShoppingProduct.scss"
 
-const ShoppingProduct = ({ title, price, description, image, category, id, clickRemoveIcon, listNumber }) => {
+import { setActiveModal, setCurrentProduct, showModal } from "../../reducers";
+
+const ShoppingProduct = ({ title, price, description, image, category, id, listNumber }) => {
+    const dispatch = useDispatch();
 
     const currentProduct = {
         title,
@@ -13,6 +16,12 @@ const ShoppingProduct = ({ title, price, description, image, category, id, click
         image,
         id,
         category
+    }
+
+    const clickRemoveIcon = product => {
+        dispatch(setActiveModal("removeProductModal"));
+        dispatch(showModal(true));
+        dispatch(setCurrentProduct(product));
     }
 
     return (
@@ -46,7 +55,6 @@ ShoppingProduct.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
     id: PropTypes.number.isRequired,
-    clickRemove: PropTypes.func,
     category: PropTypes.string,
     listNumber: PropTypes.number,
 };

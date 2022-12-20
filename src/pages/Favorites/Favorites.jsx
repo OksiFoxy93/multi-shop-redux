@@ -1,10 +1,13 @@
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+
 import { ProductCard } from "../../components/ProductCard";
 import { BackButton } from "../../components/BackButton";
-
 import "./Favorites.scss"
 
-const Favorites = ({ favoriteProducts, clickAddToCart, clickFavoriteIcon }) => {
+import { favoriteProductsSelector } from "../../selectors";
+
+const Favorites = () => {
+    const favoriteProducts = useSelector(favoriteProductsSelector);
 
     return (
         <div className="wrapper">
@@ -18,8 +21,7 @@ const Favorites = ({ favoriteProducts, clickAddToCart, clickFavoriteIcon }) => {
                                     <ProductCard
                                         { ...product }
                                         key={ product.id }
-                                        clickAddToCart={ clickAddToCart }
-                                        clickFavoriteIcon={ clickFavoriteIcon } />
+                                    />
                             ))
                         }
                     </section>)
@@ -33,12 +35,6 @@ const Favorites = ({ favoriteProducts, clickAddToCart, clickFavoriteIcon }) => {
             }
         </div>
     )
-};
-
-Favorites.propTypes = {
-    clickAddToCart: PropTypes.func,
-    clickFavoriteIcon: PropTypes.func,
-    favoriteProducts: PropTypes.array,
 };
 
 export default Favorites;

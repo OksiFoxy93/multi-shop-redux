@@ -1,25 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
 
-import { sendRequest } from "../../helpers/sendRequest";
-import { GET_ALL_PRODUCTS } from "../../config/api";
+import { isFetchingSelector, notificationSelector, productItemsSelector } from "../../selectors";
+import { fetchProductItems } from "../../reducers"
+
 import { ProductCard } from "../../components/ProductCard";
 import { Notification } from "../../components/Notification";
-
-import "./Shop.scss"
 import Loader from "../../components/Loader/Loader";
 
-const Shop = ({ clickAddToCart, clickFavoriteIcon, notification }) => {
-    const [productItems, setProductItems] = useState([]);
-    const [isFetching, setIsFetching] = useState(false);
+import "./Shop.scss"
+
+const Shop = () => {
+    const dispatch = useDispatch();
+
+    const productItems = useSelector(productItemsSelector);
+    const isFetching = useSelector(isFetchingSelector);
+    const notification = useSelector(notificationSelector);
 
     useEffect(() => {
-        setIsFetching(true)
-        sendRequest(GET_ALL_PRODUCTS)
-            .then(results => {
-                setProductItems(results)
-            })
-            .then(() => setIsFetching(false))
+        dispatch(fetchProductItems())
     }, [])
 
     return (
@@ -27,15 +27,13 @@ const Shop = ({ clickAddToCart, clickFavoriteIcon, notification }) => {
             {
                 isFetching ? <Loader /> :
                     <section className="products-wrapper wrapper">
-                        { !!productItems.length && productItems.map(product => {
-                                return <ProductCard
+                        { !!productItems.length && productItems.map(product => (
+                                <ProductCard
                                     { ...product }
                                     key={ product.id }
-                                    clickAddToCart={ clickAddToCart }
-                                    clickFavoriteIcon={ clickFavoriteIcon }
                                 />
-                            }
-                        ) }
+                            ))
+                        }
                         {
                             notification && <Notification text="Product has been added to favorites list."/>
                         }
