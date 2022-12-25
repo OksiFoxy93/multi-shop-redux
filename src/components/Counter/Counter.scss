@@ -1,0 +1,28 @@
+$dark-gray: #414040;
+$light-gray: #f0f0f0;
+$orange: #ffd333;
+
+.quantity-form {
+  display: flex;
+  justify-content: center;
+  .minus, .plus {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    border: none;
+    background-color: $orange;
+    &:hover {
+      background-color: #fac82d;
+    }
+  }
+}
+.qty {
+  width: 40px;
+  height: 30px;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  background-color: $light-gray;
+  outline: none;
+}

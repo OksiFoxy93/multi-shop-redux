@@ -1,32 +1,38 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { isFetchingProductItemsSelector, notificationSelector, productItemsSelector } from "../../selectors";
-import { fetchProductItems } from "../../reducers"
+import {
+    categoryIsFetchingProductItemsSelector,
+    categoryProductItemsSelector,
+} from "../../selectors";
+import { fetchCategoryProductItems } from "../../reducers"
 
-import { ProductCard } from "./components/ProductCard";
-import { Notification } from "../../components/Notification";
+import { ProductCard } from "../Shop/components/ProductCard";
 import Loader from "../../components/Loader/Loader";
+import { BackButton } from "../../components/BackButton";
 
-import "./Shop.scss"
+import "./Category.scss"
 
-const Shop = () => {
+const Category = () => {
     const dispatch = useDispatch();
+    const { categoryName } = useParams();
 
-    const productItems = useSelector(productItemsSelector);
-    const isFetching = useSelector(isFetchingProductItemsSelector);
-    const notification = useSelector(notificationSelector);
+    const productItems = useSelector(categoryProductItemsSelector);
+    const isFetching = useSelector(categoryIsFetchingProductItemsSelector);
 
     useEffect(() => {
-        dispatch(fetchProductItems())
-    }, [])
+        dispatch(fetchCategoryProductItems(categoryName))
+    }, [categoryName])
 
     return (
         <div className="wrapper">
+            <BackButton />
+
             {
                 isFetching ? <Loader /> :
                     <section>
-                        <h1>PRODUCTS</h1>
+                        <h1>{ categoryName }</h1>
                         <div className="products-wrapper">
                             { !!productItems.length && productItems.map(product => (
                                 <ProductCard
@@ -35,11 +41,10 @@ const Shop = () => {
                                 />))
                             }
                         </div>
-                        { notification && <Notification text="Product has been added to favorites list."/> }
                     </section>
             }
         </div>
     );
 };
 
-export default Shop;
+export default Category;

@@ -1,0 +1,44 @@
+.checkout-wrapper {
+  width: 800px;
+  margin: 0 auto 50px;
+  h2 {
+    text-align: center;
+  }
+}
+
+.checkout-form {
+  margin-top: 15px;
+  background-color: white;
+  padding: 30px;
+
+  .input-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    label {
+      width: 48%;
+    }
+  }
+
+  .submit-btn-wrapper {
+    margin: auto;
+    text-align: center;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    color: black;
+    background-color: #ffd333;
+    width: 300px;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #fac82d;
+    }
+  }
+}

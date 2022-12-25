@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "../Botton";
 import { ReactComponent as CrossIcon } from "../../icons/x-mark.svg";
@@ -11,6 +12,7 @@ import { modal } from "../../config/modal-config";
 
 const Modal = ({ closeButton }) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const currentProduct = useSelector(currentProductSelector);
     const activeModal = useSelector(activeModalSelector);
     const { title, text, firstBtnText, secondBtnText } = modal[activeModal]
@@ -24,6 +26,7 @@ const Modal = ({ closeButton }) => {
     const handleAcceptModal = (activeModal, product) => {
         if (activeModal === "addToCartModal" ) return addProductToCart(product);
         if (activeModal === "removeProductModal" ) return removeProductInCart(product);
+        if (activeModal === "orderCompleted" ) return continueShopping();
     }
 
     const addProductToCart = product => {
@@ -36,6 +39,10 @@ const Modal = ({ closeButton }) => {
         dispatch(showModal(false));
         dispatch(setCurrentProduct({}));
         dispatch(removeProduct(product));
+    }
+    const continueShopping = () => {
+        dispatch(showModal(false));
+        navigate('/')
     }
 
     const onModalBodyClick = ev => ev.stopPropagation();
@@ -54,12 +61,11 @@ const Modal = ({ closeButton }) => {
                     <Button
                         text={ firstBtnText }
                         onClick={ () => handleAcceptModal(activeModal, currentProduct) }
-                        textColorBtn="#414040"
-                        backgroundColor="#ffd333" />
+                    />
                     <Button
                         text={ secondBtnText }
                         onClick={ handleCloseModal }
-                        textColorBtn="#fff" />
+                    />
                 </div>
             </div>
         </div>

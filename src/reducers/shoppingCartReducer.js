@@ -40,4 +40,41 @@ export const addProduct = product => dispatch => {
     }
 }
 
+export const increaseQuantity = productId => dispatch => {
+    const productsInCart = [...JSON.parse(localStorage.getItem("productsInCart"))];
+    const productsWithNewQuantity = productsInCart.map( product => {
+        if (product.id === productId) {
+            return {
+                ...product,
+                quantityInCart: ++product.quantityInCart,
+                total: product.total + product.price
+            }
+        }
+        return product;
+    })
+    localStorage.setItem('productsInCart', JSON.stringify(productsWithNewQuantity));
+    dispatch(setProductsInCart(productsWithNewQuantity));
+}
+
+export const decreaseQuantity = productId => dispatch => {
+    const productsInCart = [...JSON.parse(localStorage.getItem("productsInCart"))];
+    const productsWithNewQuantity = productsInCart.map( product => {
+        if (product.id === productId) {
+            return {
+                ...product,
+                quantityInCart: product.quantityInCart > 1 ? --product.quantityInCart : 1,
+                total: product.total - product.price
+            }
+        }
+        return product;
+    })
+    localStorage.setItem('productsInCart', JSON.stringify(productsWithNewQuantity));
+    dispatch(setProductsInCart(productsWithNewQuantity));
+}
+
+export const makeOrder = () => dispatch => {
+    localStorage.removeItem('productsInCart');
+    dispatch(setProductsInCart([]));
+}
+
 export default shoppingCartSlice.reducer;

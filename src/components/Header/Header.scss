@@ -7,6 +7,9 @@ $orange: #ffd333;
   justify-content: space-between;
   background: $dark-gray;
   padding: 0 50px;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
 }
 
 nav {
@@ -27,14 +30,14 @@ nav {
   a {
     text-decoration: none;
     color: white;
-    line-height: 70px;
+    line-height: 50px;
   }
   ul {
     li {
       list-style: none;
       display: inline-block;
       a.active {
-        color: $orange;;
+        color: $orange;
       }
       a {
         padding: 24px;
@@ -73,4 +76,54 @@ nav {
 .icon-cart {
   height: 26px;
   margin-right: 2px;
+}
+
+.drop-btn {
+  padding: 27px;
+  font-size: 16px;
+  border: none;
+  background-color: $dark-gray;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown.arrow-icon {
+  fill: white;
+  margin-left: -20px;
+  transform: rotate(270deg);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: $dark-gray;
+  min-width: 180px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 0 20px;
+  text-decoration: none;
+  display: block;
+  color: white!important;
+  border-bottom: 1px solid #5d5b5b;
+}
+
+.dropdown-content a:hover {
+  background-color: $dark-gray;
+  color: #e3b20d!important;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .drop-btn {
+  background-color: #494949;
+  color: #e3b20d;
 }

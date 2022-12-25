@@ -10,5 +10,11 @@ export const modal = {
         text: "If you click OK, the product will be removed from your shopping cart, but you can add it again.",
         firstBtnText: "Ok",
         secondBtnText: "Cancel",
+    },
+    orderCompleted: {
+        title: "Your order has been successfully submit!",
+        text: "Your order number: 780000343. Do you want to continue shopping?",
+        firstBtnText: "Yes!",
+        secondBtnText: "Cancel",
     }
 }

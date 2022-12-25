@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { ProductCard } from "../../components/ProductCard";
+import { ProductCard } from "../Shop/components/ProductCard";
 import { BackButton } from "../../components/BackButton";
 import "./Favorites.scss"
 
@@ -15,16 +15,19 @@ const Favorites = () => {
             <BackButton />
             {
                 favoriteProducts && !!favoriteProducts.length ? (
-                    <section className="products-wrapper">
-                        {
-                            favoriteProducts.map( product => (
+                    <div>
+                        <h1>Favorites</h1>
+                        <section className="products-wrapper">
+                            {
+                                favoriteProducts.map( product => (
                                     <ProductCard
                                         { ...product }
                                         key={ product.id }
                                     />
-                            ))
-                        }
-                    </section>)
+                                ))
+                            }
+                        </section>
+                    </div>)
                     :
                     (<>
                         <p className="empty-list">The favorites list is currently empty. </p>

@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Button } from "../Botton";
-import { ReactComponent as StarIcon } from "../../icons/star.svg"
-import { ReactComponent as StarIconEmpty } from "../../icons/star-empty.svg";
+import { Button } from "../../../../components/Botton";
+import { ReactComponent as StarIcon } from "../../../../icons/star.svg"
+import { ReactComponent as StarIconEmpty } from "../../../../icons/star-empty.svg";
 import "./ProductCard.scss"
 
-import { getWrappedValue } from "../../helpers/getWrappedValue";
-import { setActiveModal, setCurrentProduct, showModal, toggleFavoriteProduct } from "../../reducers";
-import { favoriteProductsSelector, productsInCartSelector } from "../../selectors";
+import { getWrappedValue } from "../../../../helpers/getWrappedValue";
+import { setActiveModal, setCurrentProduct, showModal, toggleFavoriteProduct } from "../../../../reducers";
+import { favoriteProductsSelector, productsInCartSelector } from "../../../../selectors";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ title, price, description, image, id, category }) => {
     const dispatch = useDispatch();
@@ -36,7 +37,9 @@ const ProductCard = ({ title, price, description, image, id, category }) => {
         description,
         image,
         id,
-        category
+        category,
+        quantityInCart: 1,
+        total: price
     }
 
     return (
@@ -50,11 +53,15 @@ const ProductCard = ({ title, price, description, image, id, category }) => {
                 }
             </div>
             <div className="img-wrapper">
-                <img src={ image } alt={ title }/>
+                <Link to={`/product/${id}`}>
+                    <img src={ image } alt={ title }/>
+                </Link>
             </div>
             <div className="product-info">
-                <h3 title={ title }>{ getWrappedValue(title, 45) }</h3>
-                <p>{ getWrappedValue(description, 85) }</p>
+                <Link to={`/product/${id}`}>
+                    <h3 title={ title }>{ getWrappedValue(title, 45) }</h3>
+                    <p>{ getWrappedValue(description, 85) }</p>
+                </Link>
                 <div className="product-price">
                     <span>$ { price.toFixed(2) }</span>
                     <Button

@@ -6,6 +6,7 @@ import { ReactComponent as ShoppingCartIcon } from "../../icons/shopping-cart.sv
 import "./Header.scss";
 
 import { numberFavoriteProductsSelector, numberProductsInCartSelector } from "../../selectors";
+import { ReactComponent as ArrowBack } from "../../icons/left-arrow-back.svg";
 
 const Header = () => {
     const numberFavoriteProducts = useSelector(numberFavoriteProductsSelector);
@@ -22,24 +23,21 @@ const Header = () => {
                 </div>
                 <ul>
                     <li>
-                        <NavLink to="/about" >
-                            About
+                        <NavLink to="/" >
+                            Shop
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/help" >
-                            Help
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/faq" >
-                            FAQs
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contact" >
-                            Contact
-                        </NavLink>
+                        <div className="dropdown">
+                            <button className="drop-btn">Categories</button>
+                            <div className="dropdown-content">
+                                <Link to="/category/electronics">Electronics</Link>
+                                <Link to="/category/jewelery">Jewelery</Link>
+                                <Link to="/category/men's%20clothing">Men's clothing</Link>
+                                <Link to="/category/women's%20clothing">Women's clothing</Link>
+                            </div>
+                        </div>
+                        <ArrowBack className="dropdown arrow-icon" />
                     </li>
                 </ul>
             </nav>
